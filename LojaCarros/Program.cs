@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LojaCarros.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<LojaCarrosContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LojaCarrosContext") ?? throw new InvalidOperationException("Connection string 'LojaCarrosContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
